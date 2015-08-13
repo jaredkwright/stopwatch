@@ -2,7 +2,7 @@ var printf = require('printf');
 
 var TimeLineEvent = function(tag, time) {
   this.tag = tag;
-  this.time = time || new Date().getTime();
+  this.time = time || Date.now();
 
   return this;
 }
@@ -14,7 +14,7 @@ var StopWatch = function() {
   var me = this;
 
   this.start = function() {
-    var time = new Date().getTime();
+    var time = Date.now();
     me.startTime = time;
     me.timeLine.push(new TimeLineEvent('Start Timer', time));
     return;
@@ -24,7 +24,7 @@ var StopWatch = function() {
     if (!me.startTime) {
       throw new Error('You must start the StopWatch before you can stop it!');
     } else {
-      var time = new Date().getTime();
+      var time = Date.now();
       me.endTime = time;
       me.timeLine.push(new TimeLineEvent('End Timer', time));
     }
@@ -42,7 +42,7 @@ var StopWatch = function() {
       throw new Error('You must stop the StopWatch before you can logTimeLine!');
     }
     var printString = printf('%-25s%-25s%-25s', 'Elapsed', 'Delta', 'Tag');
-    printString = [printString, printf('------------------------------------------------------------------------------------')].join('\n');
+    printString = [printString, printf('--------------------------------------------------------------------------------')].join('\n');
     me.timeLine.map(function(tlPoint, index, timeline) {
       var elapsed, difference, tag;
       elapsed = (tlPoint.time - me.startTime) + ' ms';
@@ -58,7 +58,7 @@ var StopWatch = function() {
     if (!me.startTime) {
       throw new Error('You must start the StopWatch before you can getTimeElapsed!');
     }
-    var now = (me.endTime) ? me.endTime : new Date().getTime();
+    var now = (me.endTime) ? me.endTime : Date.now();
     var difference = now - me.startTime;
     return difference;
   }

@@ -6,9 +6,11 @@ setTimeout(function() {
   setTimeout(function() {
     sw.tag('bar');
     setTimeout(function() {
-      sw.tag('baz');
-      sw.stop();
-      sw.log();
-    }, 300);
-  }, 100);
-}, 200);
+      sw.tag('bazbazbaz');
+      setTimeout(function(){
+        sw.stop();
+        sw.log();
+      }, 50);
+    }, 320);
+  }, 10);
+}, 20);
